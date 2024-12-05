@@ -11,28 +11,39 @@
 
 <body>
 
-    <nav class="text-orange-800 p-4 mx-auto flex justify-between items-center max-w-2xl">
-        <a href="/" class="text-xl font-bold">Lara Blog</a>
-        <ul class="flex space-x-4">
+    <nav class="text-orange-800 py-4 mx-auto flex justify-between items-center max-w-[1280px]">
+        <a href="/"
+            class="text-2xl py-1 px-2 border border-orange-800 hover:bg-red-50 rounded-sm font-bold shadow transition-colors delay-75 ease-in-out">
+            Lara Blog
+        </a>
+        <ul class="flex space-x-6">
             @auth
                 <li>
-                    <a href="/profile" class="hover:underline">Profile</a>
+                    <a href="/profile"
+                        class="text-lg pb-1 border-2 border-transparent hover:border-b-orange-800 transition-colors duration-75 ">Profile</a>
                 </li>
                 <li>
-                    <button type="submit" class="hover:underline">Sign Out</button>
-                </li>
-            @else
-                <li>
-                    <a href="#" class="hover:underline">Sign In</a>
-                </li>
-                <li>
-                    <a href="#" class="hover:underline">Sign Up</a>
+                    <button type="submit"
+                        class="text-lg pb-1 border-2 border-transparent hover:border-b-orange-800 transition-colors duration-75">Sign
+                        Out</button>
                 </li>
             @endauth
+
+            @guest
+                <li>
+                    <x-nav-link href='/signin' :active="request()->is('signin')">Sign In</x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href='/signup' :active="request()->is('signup')">Sign Up</x-nav-link>
+                </li>
+            @endguest
+
+
         </ul>
     </nav>
 
-    <main class="py-6 max-w-[1440px] mx-auto">
+
+    <main class="py-6  mx-auto max-w-[1280px]">
         {{ $slot }}
     </main>
 
