@@ -28,6 +28,4 @@
 
     </form>
 
-
-
 </x-layout>
