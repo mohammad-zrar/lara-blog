@@ -9,7 +9,7 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body>
+<body class="min-h-screen">
 
     <nav class="text-orange-800 py-4 mx-auto flex justify-between items-center max-w-[1280px]">
         <a href="/"
@@ -31,10 +31,10 @@
 
             @guest
                 <li>
-                    <x-nav-link href='/signin' :active="request()->is('signin')">Sign In</x-nav-link>
+                    <x-nav-link href='/sign-in' :active="request()->is('sign-in')">Sign In</x-nav-link>
                 </li>
                 <li>
-                    <x-nav-link href='/signup' :active="request()->is('signup')">Sign Up</x-nav-link>
+                    <x-nav-link href='/sign-up' :active="request()->is('sign-up')">Sign Up</x-nav-link>
                 </li>
             @endguest
 

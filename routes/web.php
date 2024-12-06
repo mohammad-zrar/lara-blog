@@ -7,11 +7,18 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/signin', function() {
-    return view('auth.signin');
+Route::get('/sign-in', function() {
+    return view('auth.sign-in');
 });
-Route::post('/signin', [SessionController::class, 'store']);
 
-Route::get('/signup', function() {
-    return view('auth.signup');
+Route::post('/sign-in', [SessionController::class, 'store']);
+
+Route::get('/sign-up', function() {
+    return view('auth.sign-up');
 });
+
+Route::get('/forgot-password', function() {
+    return view("auth.forgot-password");
+});
+
+
