@@ -28,13 +28,14 @@ class SessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/jobs');
+        return redirect('/');
     }
 
     public function destroy()
     {
         Auth::logout();
 
-        return redirect('/');
+        return redirect()->back();
+       
     }
 }

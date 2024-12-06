@@ -19,13 +19,17 @@
         <ul class="flex space-x-6">
             @auth
                 <li>
-                    <a href="/profile"
-                        class="text-text pb-1 border-2 border-transparent hover:border-b-orange-800 transition-colors duration-75 ">Profile</a>
+                    <x-nav-link href='/profile' :active="request()->is('profile')">Profile</x-nav-link>
                 </li>
                 <li>
-                    <button type="submit"
-                        class="text-lg pb-1 border-2 border-transparent hover:border-b-orange-800 transition-colors duration-75">Sign
-                        Out</button>
+                    <form method="POST" action="/sign-out">
+                        @csrf
+                        @method('DELETE')
+                        <button
+                            class="text-base md:text-lg pb-1 
+           transition-all duration-75 hover:text-red-600  font-semibold">Sign
+                            Out</button>
+                    </form>
                 </li>
             @endauth
 
@@ -41,7 +45,6 @@
 
         </ul>
     </nav>
-
 
     <main class="py-6 px-4  mx-auto max-w-[1280px]">
         {{ $slot }}

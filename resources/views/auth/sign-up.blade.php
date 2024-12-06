@@ -10,6 +10,12 @@
         </div>
 
         <div class="">
+            <x-form-label for="username">Username</x-form-label>
+            <x-form-input name="username" id="username" :value="old('username')" required />
+            <x-form-error name="username" />
+        </div>
+
+        <div class="">
             <x-form-label for="email">Email</x-form-label>
             <x-form-input name="email" id="email" type="email" :value="old('email')" required />
             <x-form-error name="email" />
@@ -18,14 +24,15 @@
         <div class="">
             <x-form-label for="email_confirmation">Email Confirmation</x-form-label>
             <x-form-input name="email_confirmation" id="email_confirmation" type="email" :value="old('email')" required />
-            <x-form-error name="email" />
+            <x-form-error name="email_confirmation" />
         </div>
 
         <div class="">
-            <x-form-label for="username">Username</x-form-label>
-            <x-form-input name="username" id="username" :value="old('username')" required />
-            <x-form-error name="username" />
+            <x-form-label for="profile_picture">Profile_picture</x-form-label>
+            <x-form-input name="profile_picture" id="profile_picture" type="email" :value="old('email')" required />
+            <x-form-error name="email_confirmation" />
         </div>
+
 
         <div class="">
             <x-form-label for="passwrod">Password</x-form-label>

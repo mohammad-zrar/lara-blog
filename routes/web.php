@@ -21,4 +21,10 @@ Route::get('/forgot-password', function() {
     return view("auth.forgot-password");
 });
 
+Route::get('/profile', function() {
+    return view('profile');
+});
+
+Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');
+
 

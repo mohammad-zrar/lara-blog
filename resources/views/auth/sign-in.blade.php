@@ -1,6 +1,6 @@
 <x-layout>
 
-    <form method="POST" action="/signin" class="w-[90%] md:w-[60%] lg:w-[30%] mx-auto grid space-y-4 ">
+    <form method="POST" action="/sign-in" class="w-[90%] md:w-[60%] lg:w-[30%] mx-auto grid space-y-4 ">
         @csrf
 
         <div class="">
