@@ -27,9 +27,9 @@
 
         <div class="relative">
             <x-form-label for="profile_picture">Profile Picture (Optional)</x-form-label>
-            <div class="flex items-center mt-2">
-                <input type="file" name="profile_picture" class="placeholder:text-orange-300" id="profile_picture"
-                    class="hidden" accept="image/png, image/jpeg, image/webp" onchange="showFileName(event)" />
+            <div class="flex items-center">
+                <input type="file" name="profile_picture" id="profile_picture" class="hidden"
+                    accept="image/png, image/jpeg, image/webp" onchange="showFileName(event)" />
 
                 <label for="profile_picture"
                     class="bg-orange-500 text-white px-2 py-1 rounded-sm cursor-pointer hover:bg-orange-600 transition-all">
