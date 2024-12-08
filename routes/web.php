@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,7 @@ Route::get('/forgot-password', function () {
     return view("auth.forgot-password");
 })->name('forgot-password');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile')->middleware('auth');
 
 Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');
 

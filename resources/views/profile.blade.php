@@ -1,3 +1,5 @@
 <x-layout>
-    <h1>Profile Page</h1>
+    <p>{{ $user }}</p>
+    <p>Is Mine: {{ $isMine ? 'true' : 'false' }}</p>
+
 </x-layout>
