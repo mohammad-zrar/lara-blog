@@ -19,8 +19,11 @@
         <ul class="flex space-x-6">
             @auth
                 <li>
-                    <x-nav-link href='/profile' :active="request()->is('profile')">Profile</x-nav-link>
+                    <x-nav-link href="/profile/{{ auth()->user()->username }}" :active="request()->is('profile/' . auth()->user()->username)">
+                        My Profile
+                    </x-nav-link>
                 </li>
+
                 <li>
                     <form method="POST" action="/sign-out">
                         @csrf

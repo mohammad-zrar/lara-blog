@@ -1,5 +1,5 @@
 <x-layout>
-    <p>{{ $user }}</p>
-    <p>Is Mine: {{ $isMine ? 'true' : 'false' }}</p>
-
+    <header>
+        header
+    </header>
 </x-layout>
