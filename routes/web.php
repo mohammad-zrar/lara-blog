@@ -19,6 +19,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', fn() => view('auth.forgot-password'))->name('forgot-password');
 });
 
-Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile');
+Route::get('/{username}', [ProfileController::class, 'show'])->name('profile');
 
 Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');

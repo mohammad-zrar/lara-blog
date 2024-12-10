@@ -19,7 +19,7 @@
         <ul class="flex space-x-6">
             @auth
                 <li>
-                    <x-nav-link href="/profile/{{ auth()->user()->username }}" :active="request()->is('profile/' . auth()->user()->username)">
+                    <x-nav-link href="/{{ auth()->user()->username }}" :active="request()->is('' . auth()->user()->username)">
                         My Profile
                     </x-nav-link>
                 </li>
