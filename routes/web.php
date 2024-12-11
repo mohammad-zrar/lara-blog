@@ -21,4 +21,15 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/{username}', [ProfileController::class, 'show'])->name('profile');
 
-Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');
+
+    Route::post('/users/{user}/follow', [UserController::class, 'follow']);
+    Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow']);
+
+     Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/{username}', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+

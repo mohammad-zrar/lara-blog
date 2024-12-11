@@ -5,10 +5,10 @@
         @csrf
 
         <div class="">
-            <x-form-label for="name">Full Name</x-form-label>
-            <x-form-input name="name" class="placeholder:text-orange-300" id="name" :value="old('name')"
+            <x-form-label for="full_name">Full Name</x-form-label>
+            <x-form-input name="full_name" class="placeholder:text-orange-300" id="full_name" :value="old('full_name')"
                 placeholder="Enter your full name" required />
-            <x-form-error name="name" />
+            <x-form-error name="full_name" />
         </div>
 
         <div class="">
