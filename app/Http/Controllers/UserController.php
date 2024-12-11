@@ -20,11 +20,12 @@ class UserController extends Controller
     {
         Log::info('Test');
         $userAttributes = $request->validate([
-            'name' => ['required', 'string', 'max:50',  'regex:/^[a-zA-Z\s]+$/'],
+            'full_name' => ['required', 'string', 'max:50',  'regex:/^[a-zA-Z\s]+$/'],
             'username' => ['required', 'string', 'alpha_dash', 'min:3', 'max:20', 'unique:users,username',  'not_regex:/[@#!$%^&*]/'],
             'email' => ['required', 'email', 'unique:users,email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
             'password' => ['required', 'confirmed', Password::min(8)],
             'profile_picture' => ['nullable', File::types(['png', 'jpg', 'webp'])],
+            'bio' => ['nullable', 'string', 'max:500'],
         ]);
 
         if ($request->hasFile('profile_picture')) {

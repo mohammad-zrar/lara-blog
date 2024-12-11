@@ -18,12 +18,22 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Super Admin',
+            'full_name' => 'Super Admin',
+
             'username' => 'admin',
+
             'email' => 'admin@example.com',
+
+            'bio' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dicta debitis similique obcaecati, magni porro! Dolorem vel nobis modi, repudiandae nisi, libero quis animi molestiae numquam possimus temporibus delectus blanditiis est nostrum nesciunt iure.',
+
+            'profile_picture' => 'profile_images/default-avatar.png',
+            
             'email_verified_at' => now(),
+
             'password' => static::$password ??= Hash::make('password'),
+
             'remember_token' => Str::random(10),
+            
         ];
     }
 
