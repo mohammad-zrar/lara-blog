@@ -11,7 +11,8 @@
 
 <body class="min-h-screen">
 
-    <nav class="text-orange-800 py-4 px-2 md:px-4 mx-auto flex justify-between items-center max-w-[1280px]">
+    <nav
+        class="text-orange-800 py-4 px-2 md:px-4 mx-auto flex justify-between items-center max-w-[1024px] whitespace-nowrap">
         <a href="/"
             class="text-xl md:text-2xl py-1 px-2 border border-orange-800 hover:bg-red-50 rounded-sm font-bold shadow transition-colors delay-75 ease-in-out">
             Lara Blog
@@ -45,11 +46,10 @@
                 </li>
             @endguest
 
-
         </ul>
     </nav>
 
-    <main class="py-6 px-4  mx-auto max-w-[1280px]">
+    <main class="py-6 px-4  mx-auto max-w-[1024px]">
         {{ $slot }}
     </main>
 
