@@ -33,10 +33,11 @@
 
         <div class="mt-4">
             <x-form-label for="bio">Bio</x-form-label>
-            <x-form-textarea maxlength="500" name="bio" class="placeholder:text-orange-300" id="bio">
-                {{ $user->bio }}</x-form-textarea>
+            <x-form-textarea maxlength="500" name="bio" class="placeholder:text-orange-300"
+                id="bio">{{ old('bio', $user->bio) }} </x-form-textarea>
             <x-form-error name="bio" />
         </div>
+
 
         <div class="grid grid-cols-2 gap-2 text-center pt-3">
             <button type="submit"
@@ -63,5 +64,5 @@
             }
         }
     </script>
-
+    {{ $user->bio }}
 </x-layout>
