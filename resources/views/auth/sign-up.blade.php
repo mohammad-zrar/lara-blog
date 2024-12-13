@@ -1,5 +1,4 @@
 <x-layout>
-
     <form method="POST" action="/sign-up" enctype="multipart/form-data"
         class="w-[90%] md:w-[60%] lg:w-[30%] mx-auto grid space-y-4 ">
         @csrf

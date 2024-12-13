@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
@@ -27,8 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/{user}/follow', [UserController::class, 'follow']);
     Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow']);
 
-     Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/{username}', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/blogs/create', [PostController::class, 'create'])->name('blog.create');
 });
 
 
