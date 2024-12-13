@@ -32,13 +32,15 @@
             @endif
         </div>
 
-        <div class="grid text-center md:text-start mt-3 md:mt-0">
-            <div>
+        <div class="flex flex-col text-center md:text-start mt-4 md:mt-0 ">
+            <div class="mb-2">
                 <h1 class="text-4xl md:mx-0 mb-1">{{ $user->full_name }}</h1>
                 <p class="text-2xl text-gray-500 ">{{ $user->username }}</p>
             </div>
+            <div>
+                <p class="text-base ">{{ $user->bio }}</p>
+            </div>
 
-            <p class="text-base ">{{ $user->bio }}</p>
         </div>
     </header>
     <section id="tabs"></section>

@@ -64,5 +64,4 @@
             }
         }
     </script>
-    {{ $user->bio }}
 </x-layout>
