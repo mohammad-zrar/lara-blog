@@ -46,6 +46,15 @@ class ProfileController extends Controller
                'profile_picture' => ['nullable', File::types(['png', 'jpg', 'webp'])],
         ]);
 
+         if ($request->hasFile('profile_picture')) {
+            $validatedData['profile_picture'] = $request->file('profile_picture')->storeAs(
+                'profile_images', 
+                uniqid() . '.' . $request->file('profile_picture')->extension(), 
+                'public' 
+            );
+        }
+
+
         $user->update($validatedData);
 
         return redirect('/'.$user->username)->with('success', 'Profile updated successfully.');

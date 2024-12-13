@@ -32,7 +32,7 @@
             @endif
         </div>
 
-        <div class="grid text-center md:text-start">
+        <div class="grid text-center md:text-start mt-3 md:mt-0">
             <div>
                 <h1 class="text-4xl md:mx-0 mb-1">{{ $user->full_name }}</h1>
                 <p class="text-2xl text-gray-500 ">{{ $user->username }}</p>
