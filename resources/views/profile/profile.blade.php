@@ -1,6 +1,6 @@
 <x-layout>
     <header class="flex flex-col md:flex-row gap-2 md:gap-8">
-        <div class="grid justify-center md:justify-start h-44">
+        <div class="grid justify-center md:justify-start h-fit">
             <img class="w-[140px] min-w-[140px] rounded-full shadow-lg border"
                 src="{{ url('storage', $user->profile_picture) }}" alt="Profile Picture">
 
@@ -32,7 +32,7 @@
             @endif
         </div>
 
-        <div class="flex flex-col text-center md:text-start mt-4 md:mt-0 ">
+        <div class="flex flex-col text-center md:text-start  ">
             <div class="mb-2">
                 <h1 class="text-4xl md:mx-0 mb-1">{{ $user->full_name }}</h1>
                 <p class="text-2xl text-gray-500 ">{{ $user->username }}</p>
@@ -44,5 +44,12 @@
         </div>
     </header>
     <section id="tabs"></section>
-    <section id="content"></section>
+    <section id="content" class="mt-8">
+        <div class="grid gap-4">
+            @for ($i = 1; $i < 10; $i++)
+                <x-blog-card />
+            @endfor
+        </div>
+
+    </section>
 </x-layout>
