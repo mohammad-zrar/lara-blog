@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -13,11 +14,13 @@ class ProfileController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
 
-        $isMine = Auth::check() && Auth::user()->id === $user->id;
+        $blogs = Post::where('user_id', $user->id )->latest()->get();
 
+        $isMine = Auth::check() && Auth::user()->id === $user->id;
 
         return view('profile.profile', [
             'user' => $user,
+            'blogs' => $blogs,
             'isMine' => $isMine,
         ]);
     }

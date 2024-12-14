@@ -59,9 +59,12 @@
 
             <div class="grid gap-4 mt-4">
 
-                @for ($i = 1; $i <= 3; $i++)
-                    <x-blog-card />
-                @endfor
+                @forelse ($blogs as $blog)
+                    <x-blog-card :title="$blog->title" :author="$blog->user->full_name" :publishedAt="$blog->created_at->format('d M Y')" :categories="$blog->category"
+                        :tags="['Test', 'Example']" />
+                @empty
+                    <p class="text-center text-gray-500">No blogs to display.</p>
+                @endforelse
             </div>
         </div>
         <div id="content-saved" class="tab-content hidden">
