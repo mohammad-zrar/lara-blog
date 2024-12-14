@@ -30,25 +30,4 @@
         </form>
     </div>
 
-    <!-- Toast UI Editor Integration -->
-    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const editor = new toastui.Editor({
-                el: document.querySelector('#editor'),
-                height: '400px',
-                initialEditType: 'markdown',
-                placeholder: 'Write something cool!',
-            });
-
-            const form = document.querySelector('#create-post-form');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                document.querySelector('#content').value = editor.getMarkdown();
-                form.submit();
-            });
-        });
-    </script>
 </x-layout>
