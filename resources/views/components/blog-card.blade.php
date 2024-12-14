@@ -21,7 +21,11 @@
     <div class="flex flex-col md:items-end">
         <!-- Category -->
         <p class="text-sm font-medium text-gray-600 mb-2">
-            {{ $category->name ? 'Category: ' . $category->name : '(No Category)' }}
+            @if ($category)
+                ({{ $category->name }})
+            @else
+                (No Category)
+            @endif
         </p>
 
         <!-- Tags -->

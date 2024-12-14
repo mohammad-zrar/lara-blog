@@ -14,7 +14,7 @@
 
             <!-- Select Category -->
             <div>
-                <x-form-label for="category">Category</x-form-label>
+                <x-form-label for="category">Category (Optional)</x-form-label>
                 <select name="category" id="category"
                     class="bg-orange-50/50 border border-orange-300 text-orange-900 text-sm rounded-sm focus:ring-1 focus:ring-orange-600 focus:border-orange-500 block w-full py-1 px-2 outline-none">
                     <option value="" disabled selected>Select a category</option>
