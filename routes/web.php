@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/{username}', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/blogs/create', [PostController::class, 'create'])->name('blog.create');
+    Route::post('/blogs', [PostController::class, 'store'])->name('blog.store');
 });
 
 
