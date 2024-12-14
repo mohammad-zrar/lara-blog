@@ -48,14 +48,15 @@
 
     <section id="content" class="">
         <div id="content-pinned" class="tab-content">
+
             @auth
-                <div class="mt-4 flex justify-end">
+                <div class="flex justify-end mt-2">
                     <a href="/blogs/create"
-                        class=" bg-orange-600 hover:bg-orange-600/90 text-gray-50 px-2 py-1 rounded-sm  transition-all ">Create
-                        Blog</a>
+                        class="my-2 px-2 py-1 bg-orange-600 text-white rounded-md shadow-md hover:bg-orange-500 transition text-center w-32 h-8">
+                        Create Blog
+                    </a>
                 </div>
             @endauth
-
 
             <div class="grid gap-4 mt-4">
 

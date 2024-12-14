@@ -1,7 +1,7 @@
 @props(['title', 'author', 'publishedAt', 'categories', 'tags'])
 
 <div
-    class="flex flex-col md:flex-row items-start gap-4 p-6 w-full max-w-4xl bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer">
+    class="flex flex-col md:flex-row items-start gap-4 p-6 w-full bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer ">
     <!-- Text Section -->
     <div class="flex-1">
         <h3 class="text-2xl font-semibold text-gray-800 hover:text-orange-600 transition">
