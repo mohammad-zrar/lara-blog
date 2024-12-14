@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-
 
 class CategorySeeder extends Seeder
 {
@@ -23,14 +23,17 @@ class CategorySeeder extends Seeder
             'Lifestyle',
         ];
 
-        foreach ($categories as $category) {
-            Category::create([
-                'name' => $category,
-                'slug' => Str::slug($category),
+        foreach ($categories as $categoryName) {
+            /** @var Category $category */
+            $category = Category::create([
+                'name' => $categoryName,
+                'slug' => Str::slug($categoryName),
             ]);
-        }
 
-        // Optionally add random categories
-        Category::factory(10)->create(); // Generates 10 random categories
+            // Create and associate tags with the category
+            Tag::factory(5)->create()->each(function ($tag) use ($category) {
+                $tag->update(['category_id' => $category->id]); // Update category_id for each tag
+            });
+        }
     }
 }
