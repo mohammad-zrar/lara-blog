@@ -62,7 +62,7 @@
 
                 @forelse ($blogs as $blog)
                     <x-blog-card :title="$blog->title" :author="$blog->user->full_name" :publishedAt="$blog->created_at->format('d M Y')" :category="$blog->category"
-                        :tags="['Test', 'Example']" />
+                        :tags="$blog->tags->pluck('name')->toArray()" />
                 @empty
                     <p class="text-center text-gray-500">No blogs to display.</p>
                 @endforelse

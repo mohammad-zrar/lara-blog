@@ -1,7 +1,7 @@
-@props(['title', 'author', 'publishedAt', 'category', 'tags'])
+@props(['title', 'author', 'publishedAt', 'category', 'tags' => []])
 
 <div
-    class="flex flex-col md:flex-row items-start gap-4 p-6 w-full bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer ">
+    class="flex flex-col md:flex-row items-start gap-4 p-6 w-full bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer">
     <!-- Text Section -->
     <div class="flex-1">
         <h3 class="text-2xl font-semibold text-gray-800 hover:text-orange-600 transition">
@@ -29,14 +29,16 @@
         </p>
 
         <!-- Tags -->
-        <div class="flex flex-wrap gap-2">
-            @foreach ($tags as $tag)
-                <span
-                    class="border border-orange-200 px-3 py-1 rounded-full text-sm text-gray-800 bg-orange-50 hover:bg-orange-100 transition">
-                    {{ $tag }}
-                </span>
-            @endforeach
-        </div>
+        @if (!empty($tags))
+            <div class="flex flex-wrap gap-2">
+                @foreach ($tags as $tag)
+                    <span
+                        class="border border-orange-200 px-3 py-1 rounded-full text-sm text-gray-800 bg-orange-50 hover:bg-orange-100 transition">
+                        {{ $tag }}
+                    </span>
+                @endforeach
+            </div>
+        @endif
 
         <!-- Publish Date for Small Screens -->
         <p class="mt-3 text-sm text-gray-500 block md:hidden">

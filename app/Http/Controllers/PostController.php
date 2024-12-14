@@ -22,6 +22,8 @@ class PostController extends Controller
             'title' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_]+$/',
             'content' => 'required|string',
             'category' => 'nullable|exists:categories,id',
+             'tags' => 'nullable|array',
+    'tags.*' => 'exists:tags,id', 
         ], [
             'title.regex' => 'The title may only contain letters, numbers, spaces, dashes, and underscores.'
         ]);
@@ -38,13 +40,17 @@ class PostController extends Controller
         }
 
         // Create the post
-        Post::create([
+        $post = Post::create([
             'user_id' => Auth::id(),
             'title' => $validatedData['title'],
             'slug' => $slug,
             'content' => $validatedData['content'],
             'category_id' => $validatedData['category'] ?? null,
         ]);
+
+        if (!empty($validatedData['tags'])) {
+    $post->tags()->attach($validatedData['tags']);
+}
 
         // Redirect to the user's profile with a success message
         return redirect()
