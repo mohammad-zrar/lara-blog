@@ -25,6 +25,15 @@
                 <x-form-error name="category" />
             </div>
 
+            <!-- Select Tags -->
+            <div id="tags-container" class="hidden">
+                <x-form-label for="tags">Tags (Optional)</x-form-label>
+                <select name="tags[]" id="tags" multiple
+                    class="bg-orange-50/50 border border-orange-300 text-orange-900 text-sm rounded-sm focus:ring-1 focus:ring-orange-600 focus:border-orange-500 block w-full py-1 px-2 outline-none">
+                </select>
+                <x-form-error name="tags" />
+            </div>
+
             <!-- Markdown Editor -->
             <div>
                 <x-form-label for="content">Blog Content</x-form-label>
@@ -42,4 +51,43 @@
             </div>
         </form>
     </div>
+
+    <!-- JavaScript for Dynamic Tags -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const categorySelect = document.getElementById("category");
+            const tagsSelect = document.getElementById("tags");
+            const tagsContainer = document.getElementById("tags-container");
+
+            categorySelect.addEventListener("change", async function() {
+                const categoryId = this.value;
+
+                // If no category selected, hide the tags dropdown
+                if (!categoryId) {
+                    tagsContainer.classList.add("hidden");
+                    return;
+                }
+
+                // Fetch tags for the selected category
+                try {
+                    const response = await fetch(`/api/categories/${categoryId}/tags`);
+                    const tags = await response.json();
+
+                    // Clear and populate the tags dropdown
+                    tagsSelect.innerHTML = "";
+                    tags.forEach(tag => {
+                        const option = document.createElement("option");
+                        option.value = tag.id;
+                        option.textContent = tag.name;
+                        tagsSelect.appendChild(option);
+                    });
+
+                    // Show the tags dropdown
+                    tagsContainer.classList.remove("hidden");
+                } catch (error) {
+                    console.error("Failed to fetch tags:", error);
+                }
+            });
+        });
+    </script>
 </x-layout>

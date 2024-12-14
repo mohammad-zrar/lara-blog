@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/blogs', [PostController::class, 'store'])->name('blog.store');
 });
 
+Route::get('/api/categories/{category}/tags', [TagController::class, 'getTagsByCategory']);
 
 
