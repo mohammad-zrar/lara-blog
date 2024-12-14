@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class CategorySeeder extends Seeder
 {
@@ -12,6 +14,23 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Create predefined categories
+        $categories = [
+            'Technology',
+            'Health',
+            'Travel',
+            'Education',
+            'Lifestyle',
+        ];
+
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'slug' => Str::slug($category),
+            ]);
+        }
+
+        // Optionally add random categories
+        Category::factory(10)->create(); // Generates 10 random categories
     }
 }
