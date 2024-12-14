@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,15 +12,16 @@ class PostController extends Controller
 {
     public function create()
     {
-        return view('blogs.create');
+        $categories = Category::all();
+        return view('blogs.create', compact('categories'));
     }
 
    public function store(Request $request)
 {
-    // Validate the request
     $validatedData = $request->validate([
         'title' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_]+$/',
         'content' => 'required|string',
+        'category' => 'required|exists:categories,id',
     ], [
         'title.regex' => 'The title may only contain letters, numbers, spaces, dashes, and underscores.'
     ]);
@@ -36,11 +38,12 @@ class PostController extends Controller
     }
 
     // Create the post
-    $post = Post::create([
+    Post::create([
         'user_id' => Auth::id(),
         'title' => $validatedData['title'],
         'slug' => $slug,
         'content' => $validatedData['content'],
+        'category_id' => $validatedData['category'],
     ]);
 
     // Redirect to the user's profile with a success message
