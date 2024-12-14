@@ -1,4 +1,4 @@
-@props(['title', 'author', 'publishedAt', 'categories', 'tags'])
+@props(['title', 'author', 'publishedAt', 'category', 'tags'])
 
 <div
     class="flex flex-col md:flex-row items-start gap-4 p-6 w-full bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer ">
@@ -21,7 +21,7 @@
     <div class="flex flex-col md:items-end">
         <!-- Category -->
         <p class="text-sm font-medium text-gray-600 mb-2">
-            {{ $categories ?? '(No Category)' }}
+            {{ $category->name ? 'Category: ' . $category->name : '(No Category)' }}
         </p>
 
         <!-- Tags -->

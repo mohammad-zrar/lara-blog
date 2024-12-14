@@ -61,7 +61,7 @@
             <div class="grid gap-4 mt-4">
 
                 @forelse ($blogs as $blog)
-                    <x-blog-card :title="$blog->title" :author="$blog->user->full_name" :publishedAt="$blog->created_at->format('d M Y')" :categories="$blog->category"
+                    <x-blog-card :title="$blog->title" :author="$blog->user->full_name" :publishedAt="$blog->created_at->format('d M Y')" :category="$blog->category"
                         :tags="['Test', 'Example']" />
                 @empty
                     <p class="text-center text-gray-500">No blogs to display.</p>
