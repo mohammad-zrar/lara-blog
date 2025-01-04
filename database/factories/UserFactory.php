@@ -26,7 +26,7 @@ class UserFactory extends Factory
 
             'bio' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dicta debitis similique obcaecati, magni porro! Dolorem vel nobis modi, repudiandae nisi, libero quis animi molestiae numquam possimus temporibus delectus blanditiis est nostrum nesciunt iure.',
 
-            'profile_picture' => 'profile_images/default-avatar.png',
+            'profile_picture' => '/profile_images/default-avatar.png',
             
             'email_verified_at' => now(),
 
