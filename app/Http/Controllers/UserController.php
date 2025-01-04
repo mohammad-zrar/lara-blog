@@ -19,23 +19,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $userAttributes = $request->validate([
-            'full_name' => ['required', 'string', 'max:50',  'regex:/^[a-zA-Z\s]+$/'],
-            'username' => ['required', 'string', 'alpha_dash', 'min:3', 'max:20', 'unique:users,username',  'not_regex:/[@#!$%^&*]/'],
+            'full_name' => ['required', 'string', 'max:50', 'regex:/^[a-zA-Z\s]+$/'],
+            'username' => ['required', 'string', 'alpha_dash', 'min:3', 'max:20', 'unique:users,username', 'not_regex:/[@#!$%^&*]/'],
             'email' => ['required', 'email', 'unique:users,email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
             'password' => ['required', 'confirmed', Password::min(8)],
             'profile_picture' => ['nullable', File::types(['png', 'jpg', 'webp'])],
             'bio' => ['nullable', 'string', 'max:500'],
         ]);
 
-       
+
         if ($request->hasFile('profile_picture')) {
             $userAttributes['profile_picture'] = $request->file('profile_picture')->storeAs(
-                'profile_images', 
-                uniqid() . '.' . $request->file('profile_picture')->extension(), 
-                'public' 
+                'profile_images',
+                uniqid() . '.' . $request->file('profile_picture')->extension(),
+                'public'
             );
         } else {
-            $userAttributes['profile_picture'] = 'profile_images/default-avatar.png';
+            $userAttributes['profile_picture'] = '/profile_images/default-avatar.png';
         }
 
         $userAttributes['password'] = Hash::make($userAttributes['password']);
@@ -45,30 +45,30 @@ class UserController extends Controller
         return redirect()->route('sign-in')->with('success', 'Account created');
     }
 
-   public function follow(User $user)
-{
-    /** @var \App\Models\User $currentUser */
-    $currentUser = Auth::user();
+    public function follow(User $user)
+    {
+        /** @var \App\Models\User $currentUser */
+        $currentUser = Auth::user();
 
-    if (!$currentUser->following()->where('follower_id', $user->id)->exists()) {
-        $currentUser->following()->attach($user->id);
+        if (!$currentUser->following()->where('follower_id', $user->id)->exists()) {
+            $currentUser->following()->attach($user->id);
+        }
+
+        return redirect()->back();
     }
-
-    return redirect()->back();
-}
 
 
     public function unfollow(User $user)
-{
-    /** @var \App\Models\User $currentUser */
-    $currentUser = Auth::user();
+    {
+        /** @var \App\Models\User $currentUser */
+        $currentUser = Auth::user();
 
-    if ($currentUser->following()->where('follower_id', $user->id)->exists()) {
-        $currentUser->following()->detach($user->id);
+        if ($currentUser->following()->where('follower_id', $user->id)->exists()) {
+            $currentUser->following()->detach($user->id);
+        }
+
+        return redirect()->back();
     }
 
-     return redirect()->back();
-}
 
-  
 }

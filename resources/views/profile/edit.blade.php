@@ -12,7 +12,7 @@
             <!-- Clickable image -->
             <label for="profile_picture" class="cursor-pointer relative">
                 <img id="preview" class="w-[140px] h-[140px] rounded-full shadow-lg border group-hover:opacity-50"
-                    src="{{ url('storage', $user->profile_picture) }}" alt="Profile Picture">
+                    src="{{ $user->profile_picture }}" alt="Profile Picture">
                 <!-- Hover effect -->
                 <div
                     class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[140px] h-[140px]">
