@@ -5,6 +5,7 @@
     </div>
 
     <form method="POST" action="{{ route('profile.update', $user->username) }}" enctype="multipart/form-data">
+
         @csrf
         @method('PATCH')
 
@@ -12,7 +13,8 @@
             <!-- Clickable image -->
             <label for="profile_picture" class="cursor-pointer relative">
                 <img id="preview" class="w-[140px] h-[140px] rounded-full shadow-lg border group-hover:opacity-50"
-                    src="{{ $user->profile_picture }}" alt="Profile Picture">
+                    src="{{ $user->profile_picture ? '/storage/' . $user->profile_picture : '/images/default-avatar.png' }}"
+                    alt="Profile Picture">
                 <!-- Hover effect -->
                 <div
                     class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[140px] h-[140px]">
@@ -21,6 +23,8 @@
             </label>
             <input type="file" name="profile_picture" id="profile_picture" accept="image/*" class="hidden"
                 onchange="previewImage(event)">
+
+
             <x-form-error name="profile_picture" />
         </div>
 
@@ -58,9 +62,11 @@
 
                 reader.onload = function(e) {
                     preview.src = e.target.result; // Update the image source
+
                 };
 
                 reader.readAsDataURL(input.files[0]); // Read the uploaded file
+
             }
         }
     </script>

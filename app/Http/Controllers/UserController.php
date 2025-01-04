@@ -34,8 +34,6 @@ class UserController extends Controller
                 uniqid() . '.' . $request->file('profile_picture')->extension(),
                 'public'
             );
-        } else {
-            $userAttributes['profile_picture'] = '/profile_images/default-avatar.png';
         }
 
         $userAttributes['password'] = Hash::make($userAttributes['password']);

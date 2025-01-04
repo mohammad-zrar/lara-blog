@@ -1,7 +1,8 @@
 <x-layout>
     <header class="flex flex-col md:flex-row gap-2 md:gap-8">
         <div class="grid justify-center md:justify-start h-fit">
-            <img class="w-[140px] min-w-[140px] rounded-full shadow-lg border" src="{{ $user->profile_picture }}"
+            <img class="w-[140px] min-w-[140px] rounded-full shadow-lg border"
+                src="{{ $user->profile_picture ? '/storage/' . $user->profile_picture : '/images/default-avatar.png' }}"
                 alt="Profile Picture">
             @if ($isMine)
                 <a href="{{ route('profile.edit', $user->username) }}"
