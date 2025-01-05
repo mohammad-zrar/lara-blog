@@ -11,17 +11,23 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/blogs/{slug}', [PostController::class, 'show'])->name('showBlog');
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/sign-in', fn() => view('auth.sign-in'))->name('sign-in');
     Route::post('/sign-in', [SessionController::class, 'store']);
-    
+
     Route::get('/sign-up', fn() => view('auth.sign-up'))->name('sign-up');
     Route::post('/sign-up', [UserController::class, 'store']);
-    
+
     Route::get('/forgot-password', fn() => view('auth.forgot-password'))->name('forgot-password');
+
+
+    Route::get('/{username}', [ProfileController::class, 'show'])->name('profile');
 });
 
-Route::get('/{username}', [ProfileController::class, 'show'])->name('profile');
+Route::get("/blogs", [PostController::class, "show"])->name("showBlog");
 
 Route::middleware('auth')->group(function () {
     Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');

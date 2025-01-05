@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -22,8 +23,8 @@ class PostController extends Controller
             'title' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_]+$/',
             'content' => 'required|string',
             'category' => 'nullable|exists:categories,id',
-             'tags' => 'nullable|array',
-    'tags.*' => 'exists:tags,id', 
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ], [
             'title.regex' => 'The title may only contain letters, numbers, spaces, dashes, and underscores.'
         ]);
@@ -49,12 +50,19 @@ class PostController extends Controller
         ]);
 
         if (!empty($validatedData['tags'])) {
-    $post->tags()->attach($validatedData['tags']);
-}
+            $post->tags()->attach($validatedData['tags']);
+        }
 
         // Redirect to the user's profile with a success message
         return redirect()
             ->route('profile', Auth::user()->username)
             ->with('success', 'Blog post created successfully!');
+    }
+
+    public function show($slug)
+    {
+        Log::info("You got show blog");
+        $post = Post::where('slug', $slug)->first();
+        return view("blogs.show", ['blog' => $post]);
     }
 }
