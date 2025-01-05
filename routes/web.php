@@ -1,47 +1,48 @@
 <?php
-//test
-use App\Http\Controllers\PostController;
+
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Home Route
+Route::get('/', fn() => view('home'))->name('home');
+Route::get('/{username}', [ProfileController::class, 'show'])->name('showProfile');
 
-Route::get('/blogs/{slug}', [PostController::class, 'show'])->name('showBlog');
-
-
+// Guest Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/sign-in', fn() => view('auth.sign-in'))->name('sign-in');
-    Route::post('/sign-in', [SessionController::class, 'store']);
-
-    Route::get('/sign-up', fn() => view('auth.sign-up'))->name('sign-up');
-    Route::post('/sign-up', [UserController::class, 'store']);
-
-    Route::get('/forgot-password', fn() => view('auth.forgot-password'))->name('forgot-password');
-
-
-    Route::get('/{username}', [ProfileController::class, 'show'])->name('profile');
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/sign-in', 'showLogin')->name('login');
+        Route::post('/sign-in', 'login');
+        Route::get('/sign-up', 'showRegister')->name('register');
+        Route::post('/sign-up', 'register');
+        Route::get('/forgot-password', 'showForgotPasswordForm')->name('password.request');
+    });
 });
 
-Route::get("/blogs", [PostController::class, "show"])->name("showBlog");
+// Authenticated Routes
+Route::middleware('auth')->group(callback: function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::delete('/sign-out', 'logout')->name('logout');
+    });
 
-Route::middleware('auth')->group(function () {
-    Route::delete('/sign-out', [SessionController::class, 'destroy'])->middleware('auth');
+    Route::controller(UserController::class)->group(function () {
+        Route::post('/users/{user}/follow', 'follow')->name('user.follow');
+        Route::post('/users/{user}/unfollow', 'unfollow')->name('user.unfollow');
+    });
 
-    Route::post('/users/{user}/follow', [UserController::class, 'follow']);
-    Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow']);
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/{username}/edit', 'edit')->name('profile.edit');
+        Route::patch('/{username}', 'update')->name('profile.update');
+    });
 
-    Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/{username}', [ProfileController::class, 'update'])->name('profile.update');
-
-    Route::get('/blogs/create', [PostController::class, 'create'])->name('blog.create');
-    Route::post('/blogs', [PostController::class, 'store'])->name('blog.store');
+    Route::controller(PostController::class)->group(function () {
+        Route::get('/blogs/create', 'create')->name('blog.create');
+        Route::post('/blogs', 'store')->name('blog.store');
+    });
 });
 
+// Public API Routes
 Route::get('/api/categories/{category}/tags', [TagController::class, 'getTagsByCategory']);
-
-
