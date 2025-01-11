@@ -49,7 +49,7 @@
 
             @auth
                 <div class="flex justify-end mt-2">
-                    <x-button href="/blogs/create">
+                    <x-button link href="/blogs/create">
                         Create Blog
                     </x-button>
                 </div>

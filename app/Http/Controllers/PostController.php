@@ -40,6 +40,10 @@ class PostController extends Controller
             $counter++;
         }
 
+        // Calculate the estimated reading time
+        $wordCount = str_word_count($validatedData['content']);
+        $readingTime = ceil($wordCount / 200); // Adjust divisor for reading speed (e.g., 200 words per minute)
+
         // Create the post
         $post = Post::create([
             'user_id' => Auth::id(),
@@ -47,17 +51,19 @@ class PostController extends Controller
             'slug' => $slug,
             'content' => $validatedData['content'],
             'category_id' => $validatedData['category'] ?? null,
+            'reading_time' => $readingTime, // Save reading time to the database
         ]);
 
         if (!empty($validatedData['tags'])) {
             $post->tags()->attach($validatedData['tags']);
         }
 
-        // Redirect to the user's profile with a success message
         return redirect()
-            ->route('profile', Auth::user()->username)
+            ->route('showProfile', ['username' => Auth::user()->username])
             ->with('success', 'Blog post created successfully!');
+
     }
+
 
     public function show($slug)
     {
