@@ -20,9 +20,9 @@
         <ul class="flex space-x-6">
             @auth
                 <li>
-                    <x-nav-link href="/{{ auth()->user()->username }}" :active="request()->is('' . auth()->user()->username)">
+                    <x-layouts.nav-link href="/{{ auth()->user()->username }}" :active="request()->is('' . auth()->user()->username)">
                         My Profile
-                    </x-nav-link>
+                    </x-layouts.nav-link>
                 </li>
 
                 <li>
@@ -39,10 +39,10 @@
 
             @guest
                 <li>
-                    <x-nav-link href='/sign-in' :active="request()->is('sign-in')">Sign In</x-nav-link>
+                    <x-layouts.nav-link href='/sign-in' :active="request()->is('sign-in')">Sign In</x-layouts.nav-link>
                 </li>
                 <li>
-                    <x-nav-link href='/sign-up' :active="request()->is('sign-up')">Sign Up</x-nav-link>
+                    <x-layouts.nav-link href='/sign-up' :active="request()->is('sign-up')">Sign Up</x-layouts.nav-link>
                 </li>
             @endguest
 
@@ -50,8 +50,12 @@
     </nav>
 
     <main class="py-6 px-4  mx-auto max-w-[1024px]">
-        {{ $slot }}
+        @yield('content')
     </main>
+
+    <footer class="absolute bottom-0 left-0 bg-orange-600 text-orange-50 w-full flex justify-center py-4">
+        <p>&copy; 2025 My Laravel Blog Post</p>
+    </footer>
 
 </body>
 

@@ -1,3 +1,5 @@
-<x-layout>
-    Forgot Password
-</x-layout>
+@extends()('layouts.app')
+
+@section('content')
+    <p>Forgot Password</p>
+@endsection

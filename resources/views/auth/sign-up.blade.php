@@ -1,4 +1,5 @@
-<x-layout>
+@extends('layouts.app')
+@section('content')
     <form method="POST" action="/sign-up" enctype="multipart/form-data"
         class="w-[90%] md:w-[60%] lg:w-[30%] mx-auto grid space-y-4 ">
         @csrf
@@ -19,8 +20,8 @@
 
         <div class="">
             <x-form-label for="email">Email</x-form-label>
-            <x-form-input name="email" class="placeholder:text-orange-300" id="email" type="email"
-                :value="old('email')" placeholder="example@example.com" required />
+            <x-form-input name="email" class="placeholder:text-orange-300" id="email" type="email" :value="old('email')"
+                placeholder="example@example.com" required />
             <x-form-error name="email" />
         </div>
 
@@ -71,5 +72,4 @@
             document.getElementById('file-name').textContent = fileName;
         }
     </script>
-
-</x-layout>
+@endsection

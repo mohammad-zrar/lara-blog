@@ -44,7 +44,7 @@ Route::middleware('auth')->group(callback: function () {
     });
 });
 
-Route::get('/{username}', [ProfileController::class, 'show'])->name('showProfile');
+Route::get('/{username}', [ProfileController::class, 'show'])->where('username', '[A-Za-z0-9_-]+')->name('showProfile');
 
 // Public API Routes
 Route::get('/api/categories/{category}/tags', [TagController::class, 'getTagsByCategory']);

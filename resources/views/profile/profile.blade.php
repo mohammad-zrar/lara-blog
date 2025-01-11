@@ -1,4 +1,5 @@
-<x-layout>
+@extends('layouts.app')
+@section('content')
     <header class="flex flex-col md:flex-row gap-2 md:gap-8">
         <div class="grid justify-center md:justify-start h-fit">
             <img class="w-[140px] min-w-[140px] rounded-full shadow-lg border"
@@ -110,5 +111,4 @@
             });
         });
     </script>
-
-</x-layout>
+@endsection

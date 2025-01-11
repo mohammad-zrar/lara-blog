@@ -1,5 +1,5 @@
-<x-layout>
-
+@extends('layouts.app')
+@section('content')
     <div class="text-center mb-4">
         <h1 class="text-2xl font-bold text-orange-600">Edit Profile</h1>
     </div>
@@ -70,4 +70,5 @@
             }
         }
     </script>
-</x-layout>
+    @extends('layouts.app')
+@section('content')

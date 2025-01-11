@@ -1,15 +1,16 @@
-<x-layout>
+@extends('layouts.app')
 
+@section('content')
     <form method="POST" action="/sign-in" class="w-[90%] md:w-[60%] lg:w-[30%] mx-auto grid space-y-4 ">
         @csrf
 
-        <div class="">
+        <div>
             <x-form-label for="email">Email</x-form-label>
             <x-form-input name="email" id="email" type="email" :value="old('email')" required />
             <x-form-error name="email" />
         </div>
 
-        <div class="">
+        <div>
             <x-form-label for="passwrod">Password</x-form-label>
             <x-form-input name="password" id="password" type="password" required />
             <x-form-error name="password" />
@@ -27,5 +28,4 @@
         </div>
 
     </form>
-
-</x-layout>
+@endsection
