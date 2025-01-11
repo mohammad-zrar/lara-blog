@@ -6,7 +6,7 @@
                 src="{{ $user->profile_picture ? '/storage/' . $user->profile_picture : '/images/default-avatar.png' }}"
                 alt="Profile Picture">
             @if ($isMine)
-                <x-button link href="{{ route('profile.edit', $user->username) }}">
+                <x-button class="text-center" link href="{{ route('profile.edit', $user->username) }}">
                     Edit Profile
                 </x-button>
             @elseif(auth()->check())
