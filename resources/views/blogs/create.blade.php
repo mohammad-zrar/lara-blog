@@ -45,10 +45,9 @@
 
             <!-- Submit Button -->
             <div class="flex justify-end">
-                <button type="submit"
-                    class="px-4 py-2 bg-orange-600 text-white rounded-md shadow-md hover:bg-orange-500 transition">
+                <x-button type="submit">
                     Publish Blog
-                </button>
+                </x-button>
             </div>
         </form>
     </div>

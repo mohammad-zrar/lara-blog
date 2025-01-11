@@ -6,27 +6,24 @@
                 src="{{ $user->profile_picture ? '/storage/' . $user->profile_picture : '/images/default-avatar.png' }}"
                 alt="Profile Picture">
             @if ($isMine)
-                <a href="{{ route('profile.edit', $user->username) }}"
-                    class="my-2 px-2 py-1 bg-orange-600 text-white rounded-md shadow-md hover:bg-orange-500 transition text-center w-32 h-8">
+                <x-button link href="{{ route('profile.edit', $user->username) }}">
                     Edit Profile
-                </a>
+                </x-button>
             @elseif(auth()->check())
                 <div class="flex justify-center">
                     @if (auth()->user()->following->contains($user))
                         <form method="POST" action="/users/{{ $user->id }}/unfollow" class="mt-2">
                             @csrf
-                            <button
-                                class="my-2 px-2 py-1 border border-orange-600 text-orange-600 rounded-md shadow-md hover:bg-orange-100 transition text-center w-32 h-8">
+                            <x-button variant="outline">
                                 Unfollow
-                            </button>
+                            </x-button>
                         </form>
                     @else
                         <form method="POST" action="/users/{{ $user->id }}/follow" class="mt-2">
                             @csrf
-                            <button
-                                class="my-2 px-2 py-1 bg-orange-600 text-white rounded-md shadow-md hover:bg-orange-500 transition text-center w-32 h-8">
+                            <x-button>
                                 Follow
-                            </button>
+                            </x-button>
                         </form>
                     @endif
                 </div>
@@ -52,10 +49,9 @@
 
             @auth
                 <div class="flex justify-end mt-2">
-                    <a href="/blogs/create"
-                        class="my-2 px-2 py-1 bg-orange-600 text-white rounded-md shadow-md hover:bg-orange-500 transition text-center w-32 h-8">
+                    <x-button href="/blogs/create">
                         Create Blog
-                    </a>
+                    </x-button>
                 </div>
             @endauth
 

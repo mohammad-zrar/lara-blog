@@ -44,10 +44,8 @@
 
 
         <div class="grid grid-cols-2 gap-2 text-center pt-3">
-            <button type="submit"
-                class="bg-orange-600 hover:bg-orange-600/90 text-gray-50 px-2 py-1 rounded-sm transition-all">Save</button>
-            <a href="/{{ $user->username }}"
-                class="hover:bg-orange-50 text-orange-600 hover:text-orange-600/90 px-2 py-1 rounded-sm cursor-pointer transition-all">Cancel</a>
+            <x-button type="submit">Save</x-button>
+            <x-button variant="flat" href="/{{ $user->username }}">Cancel</x-button>
         </div>
 
     </form>

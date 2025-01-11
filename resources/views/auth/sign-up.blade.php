@@ -56,12 +56,10 @@
         </div>
 
         <div class="grid grid-cols-2 gap-2 text-center pt-3">
-            <button type="submit"
-                class="bg-orange-600 hover:bg-orange-600/90 text-gray-50 px-2 py-1 rounded-sm  transition-all">Sign
-                Up</button>
-            <a href='/sign-in'
-                class="hover:bg-orange-50 text-orange-600 hover:text-orange-600/90 px-2 py-1 rounded-sm cursor-pointer transition-all">Sign
-                In</a>
+            <x-button type="submit">Sign
+                Up</x-button>
+            <x-button link href='/sign-in' variant="flat">Sign
+                In</x-button>
         </div>
     </form>
 
