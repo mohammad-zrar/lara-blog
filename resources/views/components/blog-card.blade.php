@@ -1,12 +1,13 @@
-@props(['title', 'author', 'publishedAt', 'category', 'tags' => []])
+@props(['title', 'author', 'publishedAt', 'category', 'slug', 'tags' => []])
 
 <div
     class="flex flex-col md:flex-row items-start gap-4 p-6 w-full bg-white shadow-lg border border-gray-200 rounded-lg transition hover:shadow-xl cursor-pointer">
     <!-- Text Section -->
     <div class="flex-1">
-        <h3 class="text-2xl font-semibold text-gray-800 hover:text-orange-600 transition">
+        <a href="/blogs/{{ $slug }}"
+            class="text-2xl font-semibold text-gray-800 hover:text-orange-600 transition">
             {{ $title }}
-        </h3>
+        </a>
         <p class="mt-1 text-sm text-gray-600">
             By: <span class="underline underline-offset-4 text-gray-800 hover:text-orange-500 transition">
                 {{ $author }}

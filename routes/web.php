@@ -43,8 +43,9 @@ Route::middleware('auth')->group(callback: function () {
         Route::post('/blogs', 'store')->name('blog.store');
     });
 });
-
+Route::get("/blogs/{slug}", [PostController::class, "show"])->name('showBlog');
 Route::get('/{username}', [ProfileController::class, 'show'])->where('username', '[A-Za-z0-9_-]+')->name('showProfile');
+
 
 // Public API Routes
 Route::get('/api/categories/{category}/tags', [TagController::class, 'getTagsByCategory']);
