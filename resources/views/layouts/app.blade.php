@@ -9,10 +9,10 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col">
 
     <nav
-        class="text-orange-800 py-4 px-2 md:px-4 mx-auto flex justify-between items-center max-w-[1024px] whitespace-nowrap">
+        class="text-orange-800 py-4 px-2 md:px-4 mx-auto flex justify-between items-center max-w-[1024px] whitespace-nowrap w-full">
         <a href="/"
             class="text-xl md:text-2xl py-1 px-2 border border-orange-800 hover:bg-red-50 rounded-sm font-bold shadow transition-colors delay-75 ease-in-out">
             Lara Blog
@@ -53,10 +53,9 @@
         @yield('content')
     </main>
 
-    <footer class="absolute bottom-0 left-0 bg-orange-600 text-orange-50 w-full flex justify-center py-4">
+    <footer class="bg-orange-600 text-orange-50 w-full flex justify-center py-4 mt-auto mb-0">
         <p>&copy; 2025 My Laravel Blog Post</p>
     </footer>
-
 </body>
 
 </html>

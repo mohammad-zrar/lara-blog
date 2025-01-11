@@ -67,7 +67,6 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        Log::info('Slug: ', ['slug' => $slug]);
         $post = Post::where('slug', $slug)->first();
         return view("blogs.show", ['blog' => $post]);
     }
