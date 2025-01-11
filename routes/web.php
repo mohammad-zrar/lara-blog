@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 // Home Route
 Route::get('/', fn() => view('home'))->name('home');
-Route::get('/{username}', [ProfileController::class, 'show'])->name('showProfile');
+
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
@@ -43,6 +43,8 @@ Route::middleware('auth')->group(callback: function () {
         Route::post('/blogs', 'store')->name('blog.store');
     });
 });
+
+Route::get('/{username}', [ProfileController::class, 'show'])->name('showProfile');
 
 // Public API Routes
 Route::get('/api/categories/{category}/tags', [TagController::class, 'getTagsByCategory']);
