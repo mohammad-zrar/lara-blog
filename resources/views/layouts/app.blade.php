@@ -30,7 +30,7 @@
                         @csrf
                         @method('DELETE')
                         <button
-                            class="text-base md:text-lg pb-1 
+                            class="text-base md:text-lg pb-1
            transition-all duration-75 hover:text-red-600  font-semibold">Sign
                             Out</button>
                     </form>
@@ -53,7 +53,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-orange-600 text-orange-50 w-full flex justify-center py-4 mt-auto mb-0">
+    <footer class="bg-orange-50 text-orange-400 w-full flex justify-center py-2 mt-auto mb-0">
         <p>&copy; 2025 My Laravel Blog Post</p>
     </footer>
 </body>
