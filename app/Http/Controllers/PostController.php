@@ -68,6 +68,26 @@ class PostController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->first();
+        if(!$post) {
+            abort(404);
+        }
         return view("blogs.show", ['blog' => $post]);
     }
+
+    public function edit($slug)
+    {
+        $post = Post::where('slug', $slug)->first();
+
+        if (!$post) {
+            abort(404);
+        }
+
+        if (auth()->id() !== $post->user_id) {
+
+            return redirect('/')->with('error', 'You are not authorized to edit this post.');
+        }
+
+        return view("blogs.edit", ['blog' => $post]);
+    }
+
 }
