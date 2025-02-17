@@ -8,4 +8,8 @@
     <div class="p-4 shadow-md border border-gray-200 mt-4 text-lg overflow-auto whitespace-pre-wrap">
         {!! Str::markdown($blog->content) !!}
     </div>
+    <div class="w-full flex justify-end items-center mt-6 gap-4">
+        <x-button variant="outline">Edit Blog</x-button>
+        <x-button color="red">Delete Blog</x-button>
+    </div>
 @endsection
