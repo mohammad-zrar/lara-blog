@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <form method="POST" action="/sign-up" enctype="multipart/form-data"
-        class="grid gap-2">
+        class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto ">
         @csrf
 
         <div class="">
@@ -55,10 +55,10 @@
             <x-form-error name="password_confirmation" />
         </div>
 
-        <div class="flex justify-between">
-            <x-button type="submit">Sign
+        <div class="flex justify-between gap-2 mt-2">
+            <x-button class="w-full" type="submit">Sign
                 Up</x-button>
-            <x-button link href='/sign-in' variant="flat">Sign
+            <x-button class="w-full text-center" link href='/sign-in' variant="flat">Sign
                 In</x-button>
         </div>
     </form>
