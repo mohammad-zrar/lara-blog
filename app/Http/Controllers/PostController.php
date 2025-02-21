@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag; // Import the Tag model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -64,11 +65,49 @@ class PostController extends Controller
 
     }
 
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+
+        // Check if the authenticated user is the owner of the post
+        if (auth()->id() !== $post->user_id) {
+            return redirect('/')->with('error', 'You are not authorized to update this post.');
+        }
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_]+$/',
+            'content' => 'required|string',
+            'category' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+        ], [
+            'title.regex' => 'The title may only contain letters, numbers, spaces, dashes, and underscores.'
+        ]);
+        Log::info('Post content:', ['content' => $validatedData['content']]);
+
+        // Update the post
+        $post->update([
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'category_id' => $validatedData['category'] ?? null,
+        ]);
+
+        // Sync tags
+        if (!empty($validatedData['tags'])) {
+            $post->tags()->sync($validatedData['tags']);
+        } else {
+            $post->tags()->detach();
+        }
+
+        return redirect()
+            ->route('showBlog', ['slug' => $post->slug])
+            ->with('success', 'Blog post updated successfully!');
+    }
 
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        if(!$post) {
+        if (!$post) {
             abort(404);
         }
         return view("blogs.show", ['blog' => $post]);
@@ -83,11 +122,12 @@ class PostController extends Controller
         }
 
         if (auth()->id() !== $post->user_id) {
-
             return redirect('/')->with('error', 'You are not authorized to edit this post.');
         }
 
-        return view("blogs.edit", ['blog' => $post]);
-    }
+        $categories = Category::all(); // Fetch categories
+        $tags = Tag::all(); // Fetch tags
 
+        return view("blogs.edit", ['blog' => $post, 'categories' => $categories, 'tags' => $tags]);
+    }
 }

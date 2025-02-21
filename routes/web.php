@@ -23,7 +23,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // Authenticated Routes
-Route::middleware('auth')->group(callback: function () {
+Route::middleware('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::delete('/sign-out', 'logout')->name('logout');
     });
@@ -42,8 +42,10 @@ Route::middleware('auth')->group(callback: function () {
         Route::get('/blogs/create', 'create')->name('blog.create');
         Route::post('/blogs', 'store')->name('blog.store');
         Route::get('/blogs/{slug}/edit', 'edit')->name('blog.edit');
+        Route::patch('/blogs/{slug}', 'update')->name('blog.update');
     });
 });
+
 Route::get("/blogs/{slug}", [PostController::class, "show"])->name('showBlog');
 Route::get('/{username}', [ProfileController::class, 'show'])->where('username', '[A-Za-z0-9_-]+')->name('showProfile');
 
