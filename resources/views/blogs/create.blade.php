@@ -38,8 +38,7 @@
             <!-- Markdown Editor -->
             <div>
                 <x-form-label for="content">Blog Content</x-form-label>
-                <div id="editor" class="border border-orange-300 rounded-sm"></div>
-                <textarea name="content" id="content" class="hidden"></textarea>
+                <textarea name="content" id="content"></textarea>
                 <x-form-error name="content" />
             </div>
 
@@ -55,6 +54,16 @@
     <!-- JavaScript for Dynamic Tags -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Initialize SimpleMDE on the textarea
+            var simplemde = new SimpleMDE({
+                element: document.getElementById("content")
+            });
+
+            // Update the textarea with the editor value on submit
+            document.getElementById('create-post-form').addEventListener('submit', function() {
+                document.getElementById('content').value = simplemde.value();
+            });
+
             const categorySelect = document.getElementById("category");
             const tagsSelect = document.getElementById("tags");
             const tagsContainer = document.getElementById("tags-container");

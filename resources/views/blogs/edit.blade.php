@@ -46,24 +46,9 @@
             <!-- Markdown Editor -->
             <div>
                 <x-form-label for="content">Blog Content</x-form-label>
-                <textarea name="content" id="content" class="form-control">{!! $blog->content !!}</textarea>
+                <textarea name="content" id="content">{{ $blog->content }}</textarea>
                 <x-form-error name="content" />
             </div>
-
-            <!-- Include SimpleMDE -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-            <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    var simplemde = new SimpleMDE({
-                        element: document.getElementById("content")
-                    });
-
-                    document.getElementById('edit-post-form').addEventListener('submit', function() {
-                        document.getElementById('content').value = simplemde.value();
-                    });
-                });
-            </script>
 
             <!-- Submit Button -->
             <div class="flex justify-end">
@@ -80,6 +65,16 @@
             const categorySelect = document.getElementById("category");
             const tagsSelect = document.getElementById("tags");
             const tagsContainer = document.getElementById("tags-container");
+
+            // Initialize SimpleMDE on the textarea
+            var simplemde = new SimpleMDE({
+                element: document.getElementById("content")
+            });
+
+            // Update the textarea with the editor value on submit
+            document.getElementById('edit-post-form').addEventListener('submit', function() {
+                document.getElementById('content').value = simplemde.value();
+            });
 
             categorySelect.addEventListener("change", async function() {
                 const categoryId = this.value;
