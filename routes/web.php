@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/blogs', 'store')->name('blog.store');
         Route::get('/blogs/{slug}/edit', 'edit')->name('blog.edit');
         Route::patch('/blogs/{slug}', 'update')->name('blog.update');
+        Route::delete('/blogs/{slug}', 'destroy')->name('blog.destroy');
     });
 });
 

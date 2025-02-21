@@ -21,7 +21,12 @@
     @if (auth()->check() && auth()->id() === $blog->user_id)
         <div class="w-full flex justify-end items-center mt-6 gap-4">
             <x-button variant="outline" link href="/blogs/{{ $blog->slug }}/edit">Edit Blog</x-button>
-            <x-button color="red">Delete Blog</x-button>
+
+            <form action="/blogs/{{ $blog->id }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <x-button color="red" type="submit">Delete Blog</x-button>
+            </form>
         </div>
     @endif
 @endsection
