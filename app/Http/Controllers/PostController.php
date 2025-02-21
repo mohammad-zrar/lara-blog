@@ -83,7 +83,6 @@ class PostController extends Controller
         ], [
             'title.regex' => 'The title may only contain letters, numbers, spaces, dashes, and underscores.'
         ]);
-        Log::info('Post content:', ['content' => $validatedData['content']]);
 
         // Update the post
         $post->update([
