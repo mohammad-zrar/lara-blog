@@ -46,15 +46,22 @@
             <!-- Markdown Editor -->
             <div>
                 <x-form-label for="content">Blog Content</x-form-label>
-                <div id="editor" class="border border-orange-300 rounded-sm">{{ $blog->content }}</div>
-                <textarea name="content" id="content" class="hidden">{{ $blog->content }}</textarea>
+                <textarea name="content" id="content" class="form-control">{!! $blog->content !!}</textarea>
                 <x-form-error name="content" />
             </div>
 
+            <!-- Include SimpleMDE -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+            <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
             <script>
-                document.getElementById('edit-post-form').addEventListener('submit', function() {
-                    const editorContent = document.getElementById('editor').innerText;
-                    document.getElementById('content').value = editorContent;
+                document.addEventListener("DOMContentLoaded", function() {
+                    var simplemde = new SimpleMDE({
+                        element: document.getElementById("content")
+                    });
+
+                    document.getElementById('edit-post-form').addEventListener('submit', function() {
+                        document.getElementById('content').value = simplemde.value();
+                    });
                 });
             </script>
 
