@@ -51,7 +51,7 @@
         </ul>
     </nav>
 
-    <main class="py-6 px- w-full mx-auto max-w-[1024px]">
+    <main class="py-6 px- w-[95%] mx-auto max-w-[1024px] ">
         @yield('content')
     </main>
 
