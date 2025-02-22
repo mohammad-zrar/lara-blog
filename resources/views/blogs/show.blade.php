@@ -7,7 +7,7 @@
 
     <p class="text-orange-900">
         Category:
-        <a class="underline hover:text-orange-800" href="/categories/{{ $blog->category->slug }}">
+        <a class="underline hover:text-orange-800" href="/?category={{ $blog->category->name }}">
             {{ $blog->category->name }}
         </a>
     </p>
