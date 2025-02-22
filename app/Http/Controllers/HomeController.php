@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,9 @@ class HomeController extends Controller
         // Paginate the filtered blogs
         $blogs = $query->paginate(10);
 
-        return view('home', compact('blogs'));
+        // Retrieve categories with at least one blog post
+        $categories = Category::has('posts')->get();
+
+        return view('home', compact('blogs', 'categories'));
     }
 }
