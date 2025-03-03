@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Facades\Hash;
@@ -75,6 +77,18 @@ class AuthController extends Controller
     public function showForgotPasswordForm()
     {
         return view('auth.forgot-password');
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+
+        $email = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+        ]);
+
+        Mail::to("mzrar.dev@gmail.com")->send(new ResetPasswordMail());
+
+        return response()->json(['message' => 'A password reset link has been sent to your email address.']);
     }
 
     public function logout(Request $request)
