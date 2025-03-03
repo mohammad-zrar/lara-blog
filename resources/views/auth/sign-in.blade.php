@@ -1,4 +1,4 @@
-
+@extends('layouts.app')
 @section('content')
     <form method="POST" action="/sign-in" class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto ">
         @csrf
