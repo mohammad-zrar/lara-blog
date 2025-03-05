@@ -82,11 +82,13 @@ class AuthController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
 
-        $email = $request->validate([
+        $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
         ]);
 
-        Mail::to("mzrar.dev@gmail.com")->send(new ResetPasswordMail());
+        $email = $request->input('email');
+
+        Mail::to($email)->send(new ResetPasswordMail());
 
         return response()->json(['message' => 'A password reset link has been sent to your email address.']);
     }
