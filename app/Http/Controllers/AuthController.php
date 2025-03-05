@@ -90,7 +90,26 @@ class AuthController extends Controller
 
         Mail::to($email)->send(new ResetPasswordMail());
 
-        return response()->json(['message' => 'A password reset link has been sent to your email address.']);
+        return redirect('/reset-password')->with('message', 'A password reset link has been sent to your email address.');
+    }
+
+    public function showResetPasswordForm()
+    {
+        return view('auth.reset-password');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => ['required'],
+            'password' => ['required', 'confirmed', Password::min(8)],
+        ]);
+
+        $token = $request->input('token');
+        $password = $request->input('password');
+
+        dd($token, $password);
+
     }
 
     public function logout(Request $request)

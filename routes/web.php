@@ -21,8 +21,8 @@ Route::middleware('guest')->group(function () {
         Route::post('/sign-up', 'register');
         Route::get('/forgot-password', 'showForgotPasswordForm')->name('password.request');
         Route::post('/forgot-password', 'sendResetLinkEmail')->name('password.email');
-        // Route::get('/reset-password/{token}', 'showResetPasswordForm')->name('password.reset');
-        // Route::post('/reset-password', 'resetPassword')->name('password.update');
+        Route::get('/reset-password', 'showResetPasswordForm')->name('password.reset');
+        Route::post('/reset-password', 'resetPassword')->name('password.update');
     });
 });
 

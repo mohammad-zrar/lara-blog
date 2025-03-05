@@ -111,8 +111,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'mzrar55@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'test@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'LaraBlog'),
     ],
 
 ];
