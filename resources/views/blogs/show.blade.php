@@ -42,11 +42,16 @@
         <div class="w-full flex justify-end items-center mt-6 gap-4">
             <x-button variant="outline" link href="/blogs/{{ $blog->slug }}/edit">Edit Blog</x-button>
 
-            <form action="/blogs/{{ $blog->id }}" method="POST">
+            <form action="/blogs/{{ $blog->id }}" method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this blog?');">
                 @csrf
                 @method('DELETE')
                 <x-button color="red" type="submit">Delete Blog</x-button>
             </form>
+        </div>
+    @elseif(auth()->check())
+        <div class="w-full flex justify-end items-center mt-6 gap-4">
+            <x-button variant="outline" link href="/blogs/{{ $blog->slug }}/save">Save Blog</x-button>
         </div>
     @endif
 @endsection
