@@ -131,8 +131,9 @@ class PostController extends Controller
             $isSaved = SavedPost::where('user_id', auth()->id())->where('post_id', $post->id)->exists();
         }
 
+        $comments = $post->comments()->paginate(10);
 
-        return view("blogs.show", ['blog' => $post, 'isSaved' => $isSaved]);
+        return view("blogs.show", ['blog' => $post, 'isSaved' => $isSaved, 'comments' => $comments]);
     }
 
     public function edit($slug)

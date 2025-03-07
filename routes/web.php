@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SavedPostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Home Route
@@ -54,6 +55,12 @@ Route::middleware('auth')->group(function () {
     Route::controller(SavedPostController::class)->group(function () {
         Route::post('/saved-posts/{post}', 'save')->name('saved-posts.save');
         Route::delete('/saved-posts/{post}', 'remove')->name('saved-posts.remove');
+    });
+
+    Route::controller(CommentController::class)->group(function () {
+        Route::post('/comments', 'store')->name('comments.store');
+        Route::patch('/comments/{comment}', 'update')->name('comments.update');
+        Route::delete('/comments/{comment}', 'destroy')->name('comments.destroy');
     });
 });
 
