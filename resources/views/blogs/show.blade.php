@@ -57,19 +57,32 @@
                         {{ $comment->created_at->format('F j, Y') }}</p>
 
                     @if (auth()->check() && auth()->id() === $comment->user_id)
-                        <div class="flex justify-end gap-2 mt-2">
-                            <form action="{{ route('comments.update', $comment->id) }}" method="POST">
-                                @csrf
-                                @method('PATCH')
-                                <textarea name="content" rows="2" class="w-full border border-gray-300 rounded-md p-2">{{ $comment->content }}</textarea>
-                                <x-button type="submit" class="mt-2">Update</x-button>
-                            </form>
+                        <div class="flex justify-end items-center gap-2 mt-2" id="comment-actions-{{ $comment->id }}">
+                            <div>
+                                <x-button
+                                    onclick="document.getElementById('edit-comment-{{ $comment->id }}').classList.toggle('hidden'); document.getElementById('comment-actions-{{ $comment->id }}').classList.toggle('hidden')"
+                                    class="mt-2">Edit</x-button>
+                            </div>
 
                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this comment?');">
                                 @csrf
                                 @method('DELETE')
                                 <x-button color="red" type="submit" class="mt-2">Delete</x-button>
+                            </form>
+                        </div>
+                        <div id="edit-comment-{{ $comment->id }}" class="hidden mt-2">
+                            <form action="{{ route('comments.update', $comment->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <textarea name="content" rows="2" class="w-full border border-gray-300 rounded-md p-2">{{ $comment->content }}</textarea>
+                                <div class="flex justify-end gap-2 mt-2">
+                                    <x-button type="submit"
+                                        onclick="document.getElementById('comment-actions-{{ $comment->id }}').classList.toggle('hidden')">Update</x-button>
+                                    <x-button type="button"
+                                        onclick="document.getElementById('edit-comment-{{ $comment->id }}').classList.toggle('hidden'); document.getElementById('comment-actions-{{ $comment->id }}').classList.toggle('hidden')"
+                                        variant="flat">Cancel</x-button>
+                                </div>
                             </form>
                         </div>
                     @endif
