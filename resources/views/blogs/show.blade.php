@@ -51,7 +51,16 @@
         </div>
     @elseif(auth()->check())
         <div class="w-full flex justify-end items-center mt-6 gap-4">
-            <x-button variant="outline" link href="/blogs/{{ $blog->slug }}/save">Save Blog</x-button>
+            <form action="{{ $isSaved ? route('saved-posts.remove', $blog->id) : route('saved-posts.save', $blog->id) }}"
+                method="POST">
+                @csrf
+                @if ($isSaved)
+                    @method('DELETE')
+                @endif
+                <x-button variant="outline" type="submit">
+                    {{ $isSaved ? 'Unsave Blog' : 'Save Blog' }}
+                </x-button>
+            </form>
         </div>
     @endif
 @endsection

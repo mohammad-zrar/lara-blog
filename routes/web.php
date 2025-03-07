@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SavedPostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/blogs/{slug}/edit', 'edit')->name('blog.edit');
         Route::patch('/blogs/{slug}', 'update')->name('blog.update');
         Route::delete('/blogs/{slug}', 'destroy')->name('blog.destroy');
+    });
+
+    Route::controller(SavedPostController::class)->group(function () {
+        Route::post('/saved-posts/{post}', 'save')->name('saved-posts.save');
+        Route::delete('/saved-posts/{post}', 'remove')->name('saved-posts.remove');
     });
 });
 

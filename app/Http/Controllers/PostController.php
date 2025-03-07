@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\SavedPost;
 use App\Models\Tag; // Import the Tag model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,7 +125,14 @@ class PostController extends Controller
         if (!$post) {
             abort(404);
         }
-        return view("blogs.show", ['blog' => $post]);
+        $isSaved = false;
+
+        if (auth()->check()) {
+            $isSaved = SavedPost::where('user_id', auth()->id())->where('post_id', $post->id)->exists();
+        }
+
+
+        return view("blogs.show", ['blog' => $post, 'isSaved' => $isSaved]);
     }
 
     public function edit($slug)
