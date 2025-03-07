@@ -17,11 +17,14 @@ class ProfileController extends Controller
 
         $blogs = Post::where('user_id', $user->id)->latest()->get();
 
+        $savedBlogs = $user->savedBlogs()->latest()->get();
+
         $isMine = Auth::check() && Auth::user()->id === $user->id;
 
         return view('profile.profile', [
             'user' => $user,
             'blogs' => $blogs,
+            'savedBlogs' => $savedBlogs,
             'isMine' => $isMine,
         ]);
     }

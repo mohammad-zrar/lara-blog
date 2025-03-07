@@ -63,4 +63,9 @@ class User extends Authenticatable implements CanResetPassword
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
+
+    public function savedBlogs()
+    {
+        return $this->belongsToMany(Post::class, 'saved_post', 'user_id', 'post_id')->withTimestamps();
+    }
 }
