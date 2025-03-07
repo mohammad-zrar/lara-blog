@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="/forgot-password" class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto">
+    <form method="POST" action="{{ route('password.request') }}" class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto">
         @csrf
 
         <div class="">
@@ -9,6 +9,13 @@
             <x-form-input name="email" class="placeholder:text-orange-300" id="email" type="email" :value="old('email')"
                 placeholder="Enter your email address" required />
             <x-form-error name="email" />
+        </div>
+
+        <div>
+            @if (session('status'))
+                <div class="text-green
+                -500">{{ session('status') }}</div>
+            @endif
         </div>
 
         <div class="flex justify-between gap-2 mt-2">

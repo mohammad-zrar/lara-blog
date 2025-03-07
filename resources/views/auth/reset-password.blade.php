@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="/reset-password" class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto">
+    <form method="POST" action="{{ route('password.update') }}" class="grid gap-2 p-8 w-full md:w-[35%] lg:w-[45%] mx-auto">
         @csrf
 
+        <input type="hidden" name="token" value="{{ $token }}">
+
         <div class="">
-            <x-form-label for="token">Token</x-form-label>
-            <x-form-input name="token" class="placeholder:text-orange-300" id="token" type="text"
-                placeholder="Enter the token you received" required />
-            <x-form-error name="token" />
+            <x-form-label for="email">Email</x-form-label>
+            <x-form-input name="email" class="placeholder:text-orange-300" id="email" type="email" :value="old('email')"
+                placeholder="Enter your email address" required />
+            <x-form-error name="email" />
         </div>
 
         <div class="">

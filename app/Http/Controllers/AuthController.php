@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ResetPasswordMail;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -11,6 +12,8 @@ use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Password as FacadesPassword;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -81,35 +84,46 @@ class AuthController extends Controller
 
     public function sendResetLinkEmail(Request $request)
     {
+        $request->validate(['email' => 'required|email']);
+        // We don't check if the email exists in the database becuase FacadesPassword contract does that for us
+        $status = FacadesPassword::sendResetLink(
+            $request->only('email')
+        );
 
-        $request->validate([
-            'email' => ['required', 'email', 'exists:users,email'],
-        ]);
-
-        $email = $request->input('email');
-
-        Mail::to($email)->send(new ResetPasswordMail());
-
-        return redirect('/reset-password')->with('message', 'A password reset link has been sent to your email address.');
+        return $status === FacadesPassword::RESET_LINK_SENT
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
     }
 
-    public function showResetPasswordForm()
+    public function showResetPasswordForm(string $token)
     {
-        return view('auth.reset-password');
+        return view('auth.reset-password', ['token' => $token]);
     }
 
-    public function resetPassword(Request $request)
+    public function passwordUpdate(Request $request)
     {
         $request->validate([
-            'token' => ['required'],
-            'password' => ['required', 'confirmed', Password::min(8)],
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
         ]);
 
-        $token = $request->input('token');
-        $password = $request->input('password');
+        $status = FacadesPassword::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
 
-        dd($token, $password);
+                $user->save();
 
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status === FacadesPassword::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function logout(Request $request)
