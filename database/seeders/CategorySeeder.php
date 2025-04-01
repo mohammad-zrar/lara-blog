@@ -14,26 +14,29 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // Create predefined categories
-        $categories = [
-            'Technology',
-            'Health',
-            'Travel',
-            'Education',
-            'Lifestyle',
+        // Create predefined categories with their related tags
+        $categoriesWithTags = [
+            'Technology' => ['Programming', 'AI', 'Web Development', 'Cybersecurity', 'Cloud Computing'],
+            'Health' => ['Fitness', 'Nutrition', 'Mental Health', 'Wellness', 'Medical Research'],
+            'Travel' => ['Adventure', 'Budget Travel', 'Luxury Travel', 'Destinations', 'Travel Tips'],
+            'Education' => ['Online Learning', 'Higher Education', 'K-12', 'Teaching Methods', 'Educational Technology'],
+            'Lifestyle' => ['Fashion', 'Home Decor', 'Self-Improvement', 'Food', 'Relationships'],
         ];
 
-        foreach ($categories as $categoryName) {
+        foreach ($categoriesWithTags as $categoryName => $tags) {
             /** @var Category $category */
             $category = Category::create([
                 'name' => $categoryName,
                 'slug' => Str::slug($categoryName),
             ]);
 
-            // Create and associate tags with the category
-            Tag::factory(5)->create()->each(function ($tag) use ($category) {
-                $tag->update(['category_id' => $category->id]); // Update category_id for each tag
-            });
+            // Create meaningful tags for the category
+            foreach ($tags as $tagName) {
+                Tag::create([
+                    'name' => $tagName,
+                    'category_id' => $category->id,
+                ]);
+            }
         }
     }
 }
