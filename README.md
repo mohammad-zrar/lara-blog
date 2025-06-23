@@ -4,39 +4,53 @@ Lara Blog is a blogging platform built using **Laravel**, **Blade**, **TailwindC
 
 ## Features
 
-- User Authentication (Sign Up, Sign In, Forgot Password)
-- Create, Read, Update, and Delete (CRUD) Blog Posts
-- pin favorite top 3 blogs up to the top of it's profile
-- Category Management
-- Search for blogs or other users
-- Responsive Design
-- Users can follow each other
-- User can start blogs 
-- User can save blog 
+-   User Authentication (Sign Up, Sign In, Forgot Password)
+-   Create, Read, Update, and Delete (CRUD) Blog Posts
+-   Pin favorite top 3 blogs at the top of the user's profile
+-   Category Management
+-   Search for blogs or other users
+-   Responsive Design
+-   Users can follow each other
+-   Users can start blogs
+-   Users can save blogs
 
 ## Requirements
 
-- PHP 8.1 or higher
-- Composer
-- Node.js and NPM
-- MySQL 8.0 or higher
-- A web server (e.g., Apache or Nginx)
+-   PHP 8.1 or higher
+-   Composer
+-   Node.js and NPM
+-   MySQL 8.0 or higher
+-   A web server (e.g., Apache or Nginx)
 
-## Instruction for running the project
+## run the project by running these commands
 
-composer install
+```bash
+cp .env.example .env # Then configure the configurations in the .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan route:cache
 
-npm install 
+npm install
 npm run build
 
-Configure your database settings in the .env fil
+php artisan queue:work # To run the queue jobs
+```
 
-php artisan key:generate 
+## Important
 
-php artisan migrate --seed
+> **Mail Configuration is Required.**  
+> To enable features like account verification, password reset, and notifications, you must configure your mail settings in the `.env` file.  
+> For development and testing, it is highly recommended to use **[Mailtrap](https://mailtrap.io/)** to safely capture outgoing emails without sending them to real users.
 
-php artisan serve
+### Example Mailtrap Configuration:
 
-npm run dev
-
-
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=no-reply@larablog.test
+MAIL_FROM_NAME="Lara Blog"
+```

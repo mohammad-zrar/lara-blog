@@ -73,7 +73,7 @@ class AuthController extends Controller
 
         User::create($userAttributes);
 
-        return redirect()->route('sign-in')->with('success', 'Account created');
+        return redirect()->route('login')->with('success', 'Account created');
     }
 
     // Show forgot password form
