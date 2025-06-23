@@ -22,7 +22,7 @@ Lara Blog is a blogging platform built using **Laravel**, **Blade**, **TailwindC
 -   MySQL 8.0 or higher
 -   A web server (e.g., Apache or Nginx)
 
-## run the project by running these commands
+## Run the project by running these commands
 
 ```bash
 cp .env.example .env # Then configure the configurations in the .env
